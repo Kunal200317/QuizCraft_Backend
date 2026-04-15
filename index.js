@@ -10,11 +10,16 @@ dotenv.config();
 // Connect to database
 connectDB();
 
+console.log("🛠️  Environment Check:");
+console.log(`   - MONGO_URI: ${process.env.MONGO_URI ? "LOADED ✅" : "MISSING ❌"}`);
+console.log(`   - JWT_SECRET: ${process.env.JWT_SECRET ? "LOADED ✅" : "MISSING ❌"}`);
+console.log(`   - FRONTEND_URL: ${process.env.FRONTEND_URL || "Allow All (*)"}`);
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: process.env.FRONTEND_URL || "*",
+    origin: process.env.FRONTEND_URL || "http://localhost:5173",
     credentials: true
 }));
 app.use(express.json());
